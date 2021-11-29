@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Cache;
 use Jauntin\PdfPlatformSdk\Auth\CreateTokenRequest;
 use Jauntin\PdfPlatformSdk\Exceptions\FailedRequestException;
 use Illuminate\Support\Facades\Http;
+use Jauntin\PdfPlatformSdk\Auth\CreateTokenRequestData;
 
 class Client
 {
@@ -27,9 +28,13 @@ class Client
         if ($this->accessToken) {
             $request->withToken($this->accessToken);
         }
-        if ($data) {
+        if (
+            $data
+            &&
+            ($json = json_encode($data))
+        ) {
             $request->bodyFormat('json');
-            $request->withBody(json_encode($data), 'application/json');
+            $request->withBody($json, 'application/json');
         }
         $response = $request->send($method, $this->clientParameters->location . $path);
         if ($response->failed()) {
@@ -41,13 +46,16 @@ class Client
     private function authenticate(): void
     {
         if (!Cache::get($this->accessTokenCacheKey)) {
+            /** @var CreateTokenRequest */
             $auth = resolve(CreateTokenRequest::class, ['client' => $this]);
-            $response = $auth->request([
-                'grant_type' => 'client_credentials',
-                'client_id' => $this->clientParameters->clientId,
-                'client_secret' => $this->clientParameters->clientSecret,
-            ]);
-            Cache::put($this->accessTokenCacheKey, $response['access_token'], $response['expires_in'] - $this->accessTokenExpiryBufferPeriod);
+
+            $createTokenRequestData = new CreateTokenRequestData();
+            $createTokenRequestData->grantType = 'client_credentials';
+            $createTokenRequestData->clientId = $this->clientParameters->clientId;
+            $createTokenRequestData->clientSecret = $this->clientParameters->clientSecret;
+
+            $response = $auth->request($createTokenRequestData);
+            Cache::put($this->accessTokenCacheKey, $response->accessToken, $response->expiresIn - $this->accessTokenExpiryBufferPeriod);
         }
         $this->accessToken = Cache::get($this->accessTokenCacheKey);
     }

@@ -9,9 +9,13 @@ class GetDocumentRequest extends Request
     protected string $method = 'GET';
     protected string $path = '/api/v1/documents/%s';
 
-    public function request(array $data): array
+    /**
+     * @param GetDocumentRequestData $data
+     * @return GetDocumentResponseData
+     */
+    public function request($data)
     {
-        $this->path = sprintf($this->path, $data['id']);
-        return parent::request($data);
+        $this->path = sprintf($this->path, $data->id);
+        return new GetDocumentResponseData($this->clientRequest($data->toArray()));
     }
 }
