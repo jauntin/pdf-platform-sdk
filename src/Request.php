@@ -13,7 +13,13 @@ abstract class Request
         $this->client = $client;
     }
 
-    public function request(array $data): array
+    /**
+     * @param RequestData $data
+     * @return ResponseData
+     */
+    abstract public function request($data);
+
+    protected function clientRequest(array $data): array
     {
         return $this->client->request($this->method, $this->path, $data);
     }
