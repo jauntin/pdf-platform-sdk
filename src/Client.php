@@ -31,7 +31,7 @@ class Client
         if (
             $data
             &&
-            ($json = json_encode($data))
+            ($json = json_encode($data, JSON_THROW_ON_ERROR | JSON_INVALID_UTF8_IGNORE))
         ) {
             $request->bodyFormat('json');
             $request->withBody($json, 'application/json');
