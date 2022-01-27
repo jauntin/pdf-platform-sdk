@@ -18,4 +18,7 @@ class CellDataPlacement extends Data
     public ?string $font;
     public ?string $fontWeight;
     public ?int $fontSize;
+    public ?array $color;
+    public ?float $alpha;
+    public ?float $angle;
 }
