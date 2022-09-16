@@ -2,7 +2,11 @@
 
 namespace Jauntin\PdfPlatformSdk\Document;
 
+use Jauntin\PdfPlatformSdk\Exceptions\FailedRequestException;
+use Jauntin\PdfPlatformSdk\Exceptions\InvalidInputException;
 use Jauntin\PdfPlatformSdk\Request;
+use JsonException;
+use ReflectionException;
 
 class GetDocumentLinksRequest extends Request
 {
@@ -11,9 +15,15 @@ class GetDocumentLinksRequest extends Request
 
     /**
      * @param GetDocumentLinksRequestData $data
+     *
      * @return GetDocumentLinksResponseData
+     *
+     * @throws FailedRequestException
+     * @throws InvalidInputException
+     * @throws JsonException
+     * @throws ReflectionException
      */
-    public function request($data)
+    public function request($data): GetDocumentLinksResponseData
     {
         $this->path = sprintf($this->path, $data->id);
         return new GetDocumentLinksResponseData($this->clientRequest($data->toArray()));

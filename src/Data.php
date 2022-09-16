@@ -5,17 +5,27 @@ namespace Jauntin\PdfPlatformSdk;
 use Illuminate\Contracts\Support\Arrayable;
 use Jauntin\PdfPlatformSdk\Exceptions\InvalidInputException;
 use ReflectionClass;
+use ReflectionException;
 use ReflectionProperty;
 
 abstract class Data implements Arrayable
 {
     private ArrayKeyCaseConverter $arrayCaseConverter;
+
+    /**
+     * @throws ReflectionException
+     * @throws InvalidInputException
+     */
     public function __construct(array $data = [])
     {
         $this->arrayCaseConverter = resolve(ArrayKeyCaseConverter::class);
         $this->fromArray($data);
     }
 
+    /**
+     * @throws ReflectionException
+     * @throws InvalidInputException
+     */
     public function fromArray(array $data): void
     {
         $data = $this->arrayCaseConverter->toCamelCase($data);

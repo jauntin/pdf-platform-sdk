@@ -2,7 +2,11 @@
 
 namespace Jauntin\PdfPlatformSdk\Auth;
 
+use Jauntin\PdfPlatformSdk\Exceptions\FailedRequestException;
+use Jauntin\PdfPlatformSdk\Exceptions\InvalidInputException;
 use Jauntin\PdfPlatformSdk\Request;
+use JsonException;
+use ReflectionException;
 
 class CreateTokenRequest extends Request
 {
@@ -11,9 +15,15 @@ class CreateTokenRequest extends Request
 
     /**
      * @param CreateTokenRequestData $data
+     *
      * @return CreateTokenResponseData
+     *
+     * @throws InvalidInputException
+     * @throws ReflectionException
+     * @throws FailedRequestException
+     * @throws JsonException
      */
-    public function request($data)
+    public function request($data): CreateTokenResponseData
     {
         return new CreateTokenResponseData($this->clientRequest($data->toArray()));
     }
