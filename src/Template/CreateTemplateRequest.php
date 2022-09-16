@@ -2,7 +2,11 @@
 
 namespace Jauntin\PdfPlatformSdk\Template;
 
+use Jauntin\PdfPlatformSdk\Exceptions\FailedRequestException;
+use Jauntin\PdfPlatformSdk\Exceptions\InvalidInputException;
 use Jauntin\PdfPlatformSdk\Request;
+use JsonException;
+use ReflectionException;
 
 class CreateTemplateRequest extends Request
 {
@@ -11,9 +15,15 @@ class CreateTemplateRequest extends Request
 
     /**
      * @param CreateTemplateRequestData $data
+     *
      * @return CreateTemplateResponseData
+     *
+     * @throws FailedRequestException
+     * @throws InvalidInputException
+     * @throws JsonException
+     * @throws ReflectionException
      */
-    public function request($data)
+    public function request($data): CreateTemplateResponseData
     {
         return new CreateTemplateResponseData($this->clientRequest($data->toArray()));
     }

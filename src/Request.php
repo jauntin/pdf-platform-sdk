@@ -2,6 +2,8 @@
 
 namespace Jauntin\PdfPlatformSdk;
 
+use JsonException;
+
 abstract class Request
 {
     private Client $client;
@@ -19,6 +21,10 @@ abstract class Request
      */
     abstract public function request($data);
 
+    /**
+     * @throws Exceptions\FailedRequestException
+     * @throws JsonException
+     */
     protected function clientRequest(array $data): array
     {
         return $this->client->request($this->method, $this->path, $data);

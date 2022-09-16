@@ -22,6 +22,10 @@ class Client
         $this->authenticate();
     }
 
+    /**
+     * @throws FailedRequestException
+     * @throws \JsonException
+     */
     public function request(string $method, string $path, array $data): array
     {
         $request = Http::asJson()->acceptJson();
@@ -36,7 +40,11 @@ class Client
             $request->bodyFormat('json');
             $request->withBody($json, 'application/json');
         }
-        $response = $request->send($method, $this->clientParameters->location . $path);
+        try {
+            $response = $request->send($method, $this->clientParameters->location . $path);
+        } catch (\Exception $e) {
+            throw new FailedRequestException('Unable to complete request', 0, $e);
+        }
         if ($response->failed()) {
             throw new FailedRequestException('Unable to complete request', 0, $response->toException());
         }
