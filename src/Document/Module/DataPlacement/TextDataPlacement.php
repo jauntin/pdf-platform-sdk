@@ -12,7 +12,7 @@ class TextDataPlacement extends Data
     public float $x;
     public float $y;
     public ?string $font;
-    public ?string $fontWeight;
+    public ?string $fontStyle;
     public ?int $fontSize;
     public ?array $color;
     public ?float $alpha;
