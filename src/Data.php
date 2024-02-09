@@ -8,6 +8,9 @@ use ReflectionClass;
 use ReflectionException;
 use ReflectionProperty;
 
+/**
+ * @implements Arrayable<string, mixed>
+ */
 abstract class Data implements Arrayable
 {
     private ArrayKeyCaseConverter $arrayCaseConverter;
