@@ -23,8 +23,11 @@ class Client
     }
 
     /**
+     * @param string $method
+     * @param string $path
+     * @param array<mixed> $data
+     * @return array<mixed>
      * @throws FailedRequestException
-     * @throws \JsonException
      */
     public function request(string $method, string $path, array $data): array
     {

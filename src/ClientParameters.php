@@ -8,6 +8,10 @@ class ClientParameters
     public string $clientId;
     public string $clientSecret;
 
+    /**
+     * @param array<string,string> $parameters
+     * @return void
+     */
     public function __construct(array $parameters)
     {
         foreach ($parameters as $k => $v) {
