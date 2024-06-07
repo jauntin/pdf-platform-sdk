@@ -17,8 +17,9 @@ abstract class Data implements Arrayable
     private ArrayKeyCaseConverter $arrayCaseConverter;
 
     /**
-     * @param array<string,mixed> $data
+     * @param  array<string,mixed>  $data
      * @return void
+     *
      * @throws BindingResolutionException
      * @throws ReflectionException
      * @throws InvalidInputException
@@ -30,8 +31,8 @@ abstract class Data implements Arrayable
     }
 
     /**
-     * @param array<string,mixed> $data
-     * @return void
+     * @param  array<string,mixed>  $data
+     *
      * @throws BindingResolutionException
      * @throws ReflectionException
      * @throws InvalidInputException
@@ -51,6 +52,7 @@ abstract class Data implements Arrayable
 
     /**
      * @return array<string,mixed>
+     *
      * @throws BindingResolutionException
      */
     public function toArray(): array
@@ -68,6 +70,7 @@ abstract class Data implements Arrayable
                 }
             }
         }
+
         return $this->arrayCaseConverter->toSnakeCase($data);
     }
 }

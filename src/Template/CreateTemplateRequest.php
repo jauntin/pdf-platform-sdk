@@ -11,12 +11,11 @@ use ReflectionException;
 class CreateTemplateRequest extends Request
 {
     protected string $method = 'POST';
+
     protected string $path = '/api/v1/templates';
 
     /**
-     * @param CreateTemplateRequestData $data
-     *
-     * @return CreateTemplateResponseData
+     * @param  CreateTemplateRequestData  $data
      *
      * @throws FailedRequestException
      * @throws InvalidInputException

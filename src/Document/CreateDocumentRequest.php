@@ -11,16 +11,17 @@ use ReflectionException;
 class CreateDocumentRequest extends Request
 {
     protected string $method = 'POST';
+
     protected string $path = '/api/v1/documents';
 
     public const STATUS_PENDING = 'pending';
+
     public const STATUS_COMPLETED = 'completed';
+
     public const STATUS_FAILED = 'failed';
 
     /**
-     * @param CreateDocumentRequestData $data
-     *
-     * @return CreateDocumentResponseData
+     * @param  CreateDocumentRequestData  $data
      *
      * @throws FailedRequestException
      * @throws InvalidInputException

@@ -8,6 +8,7 @@ use Jauntin\PdfPlatformSdk\Template\Module\ModuleResponseData;
 class CreateTemplateResponseData extends ResponseData
 {
     public string $id;
-    /** @var ModuleResponseData[] $modules */
+
+    /** @var ModuleResponseData[] */
     public array $modules;
 }

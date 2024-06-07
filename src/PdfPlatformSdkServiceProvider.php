@@ -13,7 +13,7 @@ class PdfPlatformSdkServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/../config/config.php' => config_path('pdf-platform-sdk.php'),
+                __DIR__.'/../config/config.php' => config_path('pdf-platform-sdk.php'),
             ], 'config');
         }
     }
@@ -21,7 +21,7 @@ class PdfPlatformSdkServiceProvider extends ServiceProvider
     public function register()
     {
         // Automatically apply the package configuration
-        $this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'pdf-platform-sdk');
+        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'pdf-platform-sdk');
 
         $this->app->bind(ClientParameters::class, fn () => new ClientParameters([
             'location' => config('pdf-platform-sdk.location'),

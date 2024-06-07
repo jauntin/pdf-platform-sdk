@@ -11,12 +11,11 @@ use ReflectionException;
 class CreateTokenRequest extends Request
 {
     protected string $method = 'POST';
+
     protected string $path = '/oauth/token';
 
     /**
-     * @param CreateTokenRequestData $data
-     *
-     * @return CreateTokenResponseData
+     * @param  CreateTokenRequestData  $data
      *
      * @throws InvalidInputException
      * @throws ReflectionException

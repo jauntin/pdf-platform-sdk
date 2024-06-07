@@ -13,9 +13,12 @@ use Jauntin\PdfPlatformSdk\RequestData;
 class CreateDocumentRequestData extends RequestData
 {
     public string $templateId;
+
     public string $path;
+
     /** @var BladeModuleData[]|PdfModuleData[]|DocumentModuleData[]|array<int,array<string,mixed>> */
     public array $modules;
+
     /** @var CellDataPlacement[]|ImageDataPlacement[]|TextDataPlacement[]|array<int,array<string,mixed>> */
     public ?array $dataPlacements = null;
 }
