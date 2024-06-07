@@ -7,7 +7,9 @@ use Jauntin\PdfPlatformSdk\Exceptions\FailedRequestException;
 abstract class Request
 {
     private Client $client;
+
     protected string $method;
+
     protected string $path;
 
     public function __construct(Client $client)
@@ -16,14 +18,15 @@ abstract class Request
     }
 
     /**
-     * @param RequestData $data
+     * @param  RequestData  $data
      * @return ResponseData
      */
     abstract public function request($data);
 
     /**
-     * @param array<mixed> $data
+     * @param  array<mixed>  $data
      * @return array<mixed>
+     *
      * @throws FailedRequestException
      */
     protected function clientRequest(array $data): array

@@ -13,11 +13,16 @@ use Jauntin\PdfPlatformSdk\ResponseData;
 class GetDocumentResponseData extends ResponseData
 {
     public string $id;
+
     public string $templateId;
+
     public string $status;
+
     public string $path;
+
     /** @var BladeModuleData[]|PdfModuleData[]|DocumentModuleData[] */
     public array $modules;
+
     /** @var CellDataPlacement[]|ImageDataPlacement[]|TextDataPlacement[] */
     public ?array $dataPlacements = null;
 }

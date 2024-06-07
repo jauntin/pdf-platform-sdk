@@ -9,8 +9,9 @@ use Jawira\CaseConverter\CaseConverterException;
 class ArrayKeyCaseConverter
 {
     /**
-     * @param array<string,mixed> $data
+     * @param  array<string,mixed>  $data
      * @return array<string,mixed>
+     *
      * @throws BindingResolutionException
      * @throws CaseConverterException
      */
@@ -20,8 +21,9 @@ class ArrayKeyCaseConverter
     }
 
     /**
-     * @param array<string,mixed> $data
+     * @param  array<string,mixed>  $data
      * @return array<string,mixed>
+     *
      * @throws BindingResolutionException
      * @throws CaseConverterException
      */
@@ -31,9 +33,9 @@ class ArrayKeyCaseConverter
     }
 
     /**
-     * @param array<string,mixed> $data
-     * @param string $function
+     * @param  array<string,mixed>  $data
      * @return array<string,mixed>
+     *
      * @throws BindingResolutionException
      * @throws CaseConverterException
      */
@@ -45,6 +47,7 @@ class ArrayKeyCaseConverter
         foreach ($data as $k => $v) {
             $updated[$caseConverter->convert($k)->$function()] = $v;
         }
+
         return $updated;
     }
 }

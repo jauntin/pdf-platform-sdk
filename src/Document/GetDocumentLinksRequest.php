@@ -11,12 +11,11 @@ use ReflectionException;
 class GetDocumentLinksRequest extends Request
 {
     protected string $method = 'GET';
+
     protected string $path = '/api/v1/documents/%s/links';
 
     /**
-     * @param GetDocumentLinksRequestData $data
-     *
-     * @return GetDocumentLinksResponseData
+     * @param  GetDocumentLinksRequestData  $data
      *
      * @throws FailedRequestException
      * @throws InvalidInputException
@@ -26,6 +25,7 @@ class GetDocumentLinksRequest extends Request
     public function request($data): GetDocumentLinksResponseData
     {
         $this->path = sprintf($this->path, $data->id);
+
         return new GetDocumentLinksResponseData($this->clientRequest($data->toArray()));
     }
 }

@@ -3,17 +3,19 @@
 namespace Jauntin\PdfPlatformSdk;
 
 use Illuminate\Support\Facades\Cache;
-use Jauntin\PdfPlatformSdk\Auth\CreateTokenRequest;
-use Jauntin\PdfPlatformSdk\Exceptions\FailedRequestException;
 use Illuminate\Support\Facades\Http;
+use Jauntin\PdfPlatformSdk\Auth\CreateTokenRequest;
 use Jauntin\PdfPlatformSdk\Auth\CreateTokenRequestData;
+use Jauntin\PdfPlatformSdk\Exceptions\FailedRequestException;
 
 class Client
 {
     private ClientParameters $clientParameters;
+
     private string $accessToken = '';
 
     private string $accessTokenCacheKey = 'pdf_platform_access_token';
+
     private int $accessTokenExpiryBufferPeriod = 240;
 
     public function __construct(ClientParameters $clientParameters)
@@ -23,10 +25,9 @@ class Client
     }
 
     /**
-     * @param string $method
-     * @param string $path
-     * @param array<mixed> $data
+     * @param  array<mixed>  $data
      * @return array<mixed>
+     *
      * @throws FailedRequestException
      */
     public function request(string $method, string $path, array $data): array
@@ -44,19 +45,20 @@ class Client
             $request->withBody($json, 'application/json');
         }
         try {
-            $response = $request->send($method, $this->clientParameters->location . $path);
+            $response = $request->send($method, $this->clientParameters->location.$path);
         } catch (\Exception $e) {
             throw new FailedRequestException('Unable to complete request', 0, $e);
         }
         if ($response->failed()) {
             throw new FailedRequestException('Unable to complete request', 0, $response->toException());
         }
+
         return $response->json();
     }
 
     private function authenticate(): void
     {
-        if (!Cache::get($this->accessTokenCacheKey)) {
+        if (! Cache::get($this->accessTokenCacheKey)) {
             /** @var CreateTokenRequest */
             $auth = resolve(CreateTokenRequest::class, ['client' => $this]);
 
