@@ -2,6 +2,4 @@
 
 namespace Jauntin\PdfPlatformSdk;
 
-abstract class ResponseData extends Data
-{
-}
+abstract class ResponseData extends Data {}

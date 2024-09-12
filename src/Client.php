@@ -62,7 +62,7 @@ class Client
             /** @var CreateTokenRequest */
             $auth = resolve(CreateTokenRequest::class, ['client' => $this]);
 
-            $createTokenRequestData = new CreateTokenRequestData();
+            $createTokenRequestData = new CreateTokenRequestData;
             $createTokenRequestData->grantType = 'client_credentials';
             $createTokenRequestData->clientId = $this->clientParameters->clientId;
             $createTokenRequestData->clientSecret = $this->clientParameters->clientSecret;
