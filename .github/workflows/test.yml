@@ -10,30 +10,39 @@ on:
         default: ${{ github.ref }}
 jobs:
   Lint:
-    runs-on: arc-runner-set
-    container:
-      image: ghcr.io/jauntin/php-test-image:8.3
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           ref: ${{ inputs.ref || github.ref }}
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.3
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, bcmath, intl, gd, exif, iconv, fileinfo
       - run: composer install
       - run: "parallel ::: 'vendor/bin/pint --test' 'vendor/bin/phpstan --no-interaction --no-ansi'"
   test:
     strategy:
       fail-fast: true
       matrix:
+        package:
+          - php: 8.1
+            laravel: ^10.0
+          - php: 8.3
+            laravel: ^10.0
+          - php: 8.3
+            laravel: ^11.0
         stability: [prefer-lowest, prefer-stable]
-        laravel: [^10.0]
-    runs-on: arc-runner-set
-    name: L${{ matrix.laravel }} - ${{ matrix.stability }}
-    container:
-      image: ghcr.io/jauntin/php-test-image:8.3
+    runs-on: ubuntu-latest
+    name: P${{ matrix.package.php }}L${{ matrix.package.laravel }} - ${{ matrix.stability }}
     steps:
       - uses: actions/checkout@v4
         with:
           ref: ${{ inputs.ref || github.ref }}
-      - run: |
-          composer require "laravel/framework:${{ matrix.laravel }}" --no-interaction --no-update
-          composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.package.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, bcmath, intl, gd, exif, iconv, fileinfo
+      - run: composer require "laravel/framework:${{ matrix.package.laravel }}" --no-interaction --no-update
+      - run: composer update --${{ matrix.stability }} --prefer-dist --no-interaction
       - run: vendor/bin/phpunit --coverage-text

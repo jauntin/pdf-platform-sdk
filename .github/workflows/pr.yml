@@ -4,14 +4,15 @@ on:
   workflow_dispatch:
 jobs:
   Fix:
-    runs-on: arc-runner-set
+    runs-on: ubuntu-latest
     outputs:
       ref: ${{ steps.commit.outputs.commit_hash || github.ref }}
-    container:
-      image: ghcr.io/jauntin/php-test-image:8.3
-      options: --user 1001
     steps:
       - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.3
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, bcmath, intl, gd, exif, iconv, fileinfo
       - run: composer install
       - run: vendor/bin/pint
       - id: commit
