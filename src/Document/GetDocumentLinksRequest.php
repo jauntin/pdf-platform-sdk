@@ -26,6 +26,6 @@ class GetDocumentLinksRequest extends Request
     {
         $this->path = sprintf($this->path, $data->id);
 
-        return new GetDocumentLinksResponseData($this->clientRequest($data->toArray()));
+        return new GetDocumentLinksResponseData($this->clientRequest([]));
     }
 }
