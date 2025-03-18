@@ -5,7 +5,6 @@ namespace Jauntin\PdfPlatformSdk\Document;
 use Jauntin\PdfPlatformSdk\Exceptions\FailedRequestException;
 use Jauntin\PdfPlatformSdk\Exceptions\InvalidInputException;
 use Jauntin\PdfPlatformSdk\Request;
-use JsonException;
 use ReflectionException;
 
 class CreateDocumentRequest extends Request
@@ -23,10 +22,9 @@ class CreateDocumentRequest extends Request
     /**
      * @param  CreateDocumentRequestData  $data
      *
-     * @throws FailedRequestException
      * @throws InvalidInputException
-     * @throws JsonException
      * @throws ReflectionException
+     * @throws FailedRequestException
      */
     public function request($data): CreateDocumentResponseData
     {
