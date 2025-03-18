@@ -1,13 +1,12 @@
 {
     "name": "jauntin/pdf-platform-sdk",
     "description": "SDK for integrating with Jauntin's PDF platform",
+    "license": "MIT",
+    "type": "library",
     "keywords": [
         "jauntin",
         "pdf-platform-sdk"
     ],
-    "homepage": "https://github.com/jauntin/pdf-platform-sdk",
-    "license": "MIT",
-    "type": "library",
     "authors": [
         {
             "name": "Sid Momin",
@@ -15,16 +14,18 @@
             "role": "Developer"
         }
     ],
+    "homepage": "https://github.com/jauntin/pdf-platform-sdk",
     "require": {
-        "php": ">=8.1 <8.4",
-        "illuminate/support": "^10.0|^11.0",
+        "php": ">=8.3 <8.4",
+        "illuminate/support": "^10.0 || ^11.0 || ^12.0",
         "jawira/case-converter": "^3.4"
     },
     "require-dev": {
-        "laravel/pint": "^1.18.1",
-        "orchestra/testbench": "^8.27.2|^9.5.2",
-        "phpstan/phpstan": "^1.12.7",
-        "phpunit/phpunit": "^10.5.38|^11.4.3"
+        "laravel/pint": "^1.21.2",
+        "mockery/mockery": "^1.6",
+        "orchestra/testbench": "^8.27.2 || ^9.5.2 || ^10.1.0",
+        "phpstan/phpstan": "^2.1.8",
+        "phpunit/phpunit": "^10.5.38 || ^11.5.13"
     },
     "autoload": {
         "psr-4": {

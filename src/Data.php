@@ -42,7 +42,7 @@ abstract class Data implements Arrayable
         $data = $this->arrayCaseConverter->toCamelCase($data);
         $reflect = new ReflectionClass($this);
         foreach ($data as $key => $value) {
-            if (is_string($key) && property_exists($this, $key) && $reflect->getProperty($key)->isPublic()) {
+            if (property_exists($this, $key) && $reflect->getProperty($key)->isPublic()) {
                 $this->{$key} = $value;
             } else {
                 throw new InvalidInputException("Unknown property $key");
