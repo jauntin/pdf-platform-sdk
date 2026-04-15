@@ -12,7 +12,7 @@ jobs:
   Lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           ref: ${{ inputs.ref || github.ref }}
       - uses: shivammathur/setup-php@v2
@@ -36,7 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     name: P${{ matrix.package.php }}L${{ matrix.package.laravel }} - ${{ matrix.stability }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           ref: ${{ inputs.ref || github.ref }}
       - uses: shivammathur/setup-php@v2

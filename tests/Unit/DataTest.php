@@ -3,6 +3,7 @@
 namespace Jauntin\PdfPlatformSdk\Tests\Unit;
 
 use Jauntin\PdfPlatformSdk\Data;
+use Jauntin\PdfPlatformSdk\Exceptions\InvalidInputException;
 use Jauntin\PdfPlatformSdk\Tests\TestCase;
 
 class TestData extends Data
@@ -64,7 +65,7 @@ class DataTest extends TestCase
 
     public function test_it_throws_exception_for_unknown_property(): void
     {
-        $this->expectException(\Jauntin\PdfPlatformSdk\Exceptions\InvalidInputException::class);
+        $this->expectException(InvalidInputException::class);
         $this->expectExceptionMessage('Unknown property unknownField');
 
         $this->data->fromArray([
