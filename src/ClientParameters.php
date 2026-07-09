@@ -11,13 +11,12 @@ class ClientParameters
     public string $clientSecret;
 
     /**
-     * @param  array<string,string>  $parameters
-     * @return void
+     * @param  array{location: string, clientId: string, clientSecret: string}  $parameters
      */
     public function __construct(array $parameters)
     {
-        foreach ($parameters as $k => $v) {
-            $this->{$k} = $v;
-        }
+        $this->location = $parameters['location'];
+        $this->clientId = $parameters['clientId'];
+        $this->clientSecret = $parameters['clientSecret'];
     }
 }
